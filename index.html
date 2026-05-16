@@ -1,1 +1,231 @@
 
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Next Stop</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:-apple-system,sans-serif}
+body{background:#f5f5f0;min-height:100vh}
+#login{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;padding:2rem}
+.logo{text-align:center;margin-bottom:2rem}
+.logo h1{font-size:26px;font-weight:600;color:#111}
+.logo p{font-size:14px;color:#888;margin-top:4px}
+.pinbox{background:#f5f5f0;border:1px solid #e0e0d8;border-radius:16px;padding:1.75rem;width:100%;max-width:320px;text-align:center}
+.pinbox label{font-size:13px;color:#666;display:block;margin-bottom:14px}
+.dots{display:flex;justify-content:center;gap:14px;margin-bottom:1.5rem;direction:ltr}
+.dot{width:16px;height:16px;border-radius:50%;border:2px solid #ccc;background:transparent}
+.dot.on{background:#111;border-color:#111}
+.keys{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;direction:ltr}
+.keys button{height:56px;border-radius:12px;font-size:22px;font-weight:500;background:#fff;border:1px solid #e0e0d8;color:#111;cursor:pointer;touch-action:manipulation}
+.keys button:active{background:#eee}
+.errmsg{font-size:13px;color:#e24b4a;margin-top:10px;height:18px}
+#app{display:none;max-width:600px;margin:0 auto}
+.topbar{background:#fff;border-bottom:1px solid #e8e8e0;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.topbar h2{font-size:18px;font-weight:600;color:#111}
+.topbar small{font-size:12px;color:#888;display:block}
+.topbar button{font-size:12px;color:#888;background:none;border:1px solid #e0e0d8;border-radius:8px;padding:5px 12px;cursor:pointer}
+.search{padding:1rem 1.25rem;background:#f5f5f0;border-bottom:1px solid #e8e8e0}
+.search label{font-size:12px;color:#888;display:block;margin-bottom:6px}
+.searchrow{display:flex;gap:8px;direction:ltr}
+.searchrow input{flex:1;height:42px;border-radius:10px;border:1px solid #ccc;background:#fff;padding:0 14px;font-size:15px;color:#111;outline:none;direction:rtl}
+.searchrow button{height:42px;padding:0 18px;background:#111;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer;font-weight:500}
+.cattabs{display:flex;gap:6px;padding:.75rem 1.25rem;overflow-x:auto;background:#fff;border-bottom:1px solid #e8e8e0;direction:ltr;scrollbar-width:none}
+.ctab{padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid #e0e0d8;background:#f5f5f0;color:#666;white-space:nowrap;touch-action:manipulation}
+.ctab.on{background:#111;color:#fff;border-color:#111}
+.results{padding:1rem 1.25rem}
+.card{background:#fff;border:1px solid #e8e8e0;border-radius:14px;margin-bottom:12px;overflow:hidden}
+.cardimg{width:100%;height:160px;object-fit:cover;display:block}
+.cardbody{padding:.875rem 1rem;display:flex;align-items:flex-start;gap:10px;direction:rtl}
+.cardico{width:34px;height:34px;border-radius:8px;background:#f5f5f0;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:18px}
+.cardname{font-size:15px;font-weight:600;color:#111}
+.carddesc{font-size:12px;color:#666;margin-top:3px}
+.cardtip{font-size:11px;color:#999;margin-top:4px}
+.empty{text-align:center;padding:3rem 1rem;color:#aaa;font-size:14px}
+.bigico{font-size:40px;margin-bottom:10px}
+.spin{display:inline-block;width:16px;height:16px;border:2px solid #ddd;border-top-color:#111;border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle}
+@keyframes sp{to{transform:rotate(360deg)}}
+.footer{border-top:1px solid #e8e8e0;padding:1rem;background:#fff;text-align:center;margin-top:1rem}
+.footlinks{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.footlinks a{font-size:12px;color:#888;text-decoration:none}
+.footbrand{font-size:11px;color:#bbb}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <div class="logo">
+    <div style="font-size:48px">&#x2708;&#xFE0F;</div>
+    <h1>Next Stop</h1>
+    <p>&#x05DE;&#x05D3;&#x05E8;&#x05D9;&#x05DA; &#x05D4;&#x05E0;&#x05E1;&#x05D9;&#x05E2;&#x05D5;&#x05EA; &#x05E9;&#x05DC;&#x05DA;</p>
+  </div>
+  <div class="pinbox">
+    <label>&#x05D4;&#x05D6;&#x05DF; &#x05E7;&#x05D5;&#x05D3; &#x05D2;&#x05D9;&#x05E9;&#x05D4;</label>
+    <div class="dots">
+      <div class="dot" id="d0"></div>
+      <div class="dot" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+    <div class="keys">
+      <button id="k1">1</button><button id="k2">2</button><button id="k3">3</button>
+      <button id="k4">4</button><button id="k5">5</button><button id="k6">6</button>
+      <button id="k7">7</button><button id="k8">8</button><button id="k9">9</button>
+      <button id="kdel" style="grid-column:1">&#x232B;</button>
+      <button id="k0" style="grid-column:2">0</button>
+    </div>
+    <div class="errmsg" id="errmsg"></div>
+  </div>
+</div>
+
+<div id="app">
+  <div class="topbar">
+    <div><h2>Next Stop</h2><small id="subloc">&#x05DE;&#x05D3;&#x05E8;&#x05D9;&#x05DA; &#x05D4;&#x05E0;&#x05E1;&#x05D9;&#x05E2;&#x05D5;&#x05EA; &#x05E9;&#x05DC;&#x05DA;</small></div>
+    <button id="btnout">&#x05D9;&#x05E6;&#x05D9;&#x05D0;&#x05D4;</button>
+  </div>
+  <div class="search">
+    <label>&#x05D7;&#x05E4;&#x05E9; &#x05E2;&#x05D9;&#x05E8;, &#x05DE;&#x05D3;&#x05D9;&#x05E0;&#x05D4; &#x05D0;&#x05D5; &#x05DE;&#x05DC;&#x05D5;&#x05DF;</label>
+    <div class="searchrow">
+      <input type="text" id="srcinput" placeholder="Paris, Rome, Barcelona..."/>
+      <button id="btnsrc">&#x05D7;&#x05E4;&#x05E9;</button>
+    </div>
+  </div>
+  <div class="cattabs">
+    <button class="ctab on" id="call">&#x05D4;&#x05DB;&#x05DC;</button>
+    <button class="ctab" id="c0">&#x1F37D;&#xFE0F; &#x05DE;&#x05E1;&#x05E2;&#x05D3;&#x05D5;&#x05EA;</button>
+    <button class="ctab" id="c1">&#x1F3A1; &#x05D0;&#x05D8;&#x05E8;&#x05E7;&#x05E6;&#x05D9;&#x05D5;&#x05EA;</button>
+    <button class="ctab" id="c2">&#x1F3AD; &#x05D1;&#x05D9;&#x05DC;&#x05D5;&#x05D9;</button>
+    <button class="ctab" id="c3">&#x1F68C; &#x05EA;&#x05D7;&#x05D1;&#x05D5;&#x05E8;&#x05D4;</button>
+    <button class="ctab" id="c4">&#x1F6CD;&#xFE0F; &#x05E7;&#x05E0;&#x05D9;&#x05D5;&#x05EA;</button>
+  </div>
+  <div class="results" id="results">
+    <div class="empty"><div class="bigico">&#x1F5FA;&#xFE0F;</div>&#x05D4;&#x05D6;&#x05DF; &#x05DE;&#x05D9;&#x05E7;&#x05D5;&#x05DD;</div>
+  </div>
+  <div class="footer">
+    <div class="footlinks">
+      <a href="https://did.li/Nextstop" target="_blank">&#x05D5;&#x05D5;&#x05D0;&#x05D8;&#x05E1;&#x05D0;&#x05E4; &#x05D3;&#x05D9;&#x05DC;&#x05D9;&#x05DD;</a>
+      <a href="https://wa.me/972523370504" target="_blank">&#x05D5;&#x05D5;&#x05D0;&#x05D8;&#x05E1;&#x05D0;&#x05E4; &#x05D9;&#x05E9;&#x05D9;&#x05E8;</a>
+      <a href="https://did.li/Nexttsop-facebook" target="_blank">&#x05E4;&#x05D9;&#x05D9;&#x05E1;&#x05D1;&#x05D5;&#x05E7;</a>
+      <a href="https://did.li/nextstop-instagram" target="_blank">&#x05D0;&#x05D9;&#x05E0;&#x05E1;&#x05D8;&#x05D2;&#x05E8;&#x05DD;</a>
+    </div>
+    <div class="footbrand">Next Stop 2026 | 052-3370504</div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var CODE = "5262";
+  var pin = "";
+  var places = [];
+  var curcat = -1;
+
+  function addPin(n) {
+    if (pin.length >= 4) return;
+    pin += String(n);
+    document.getElementById("d" + (pin.length - 1)).classList.add("on");
+    if (pin.length === 4) setTimeout(checkPin, 200);
+  }
+
+  function delPin() {
+    if (!pin.length) return;
+    pin = pin.slice(0, -1);
+    document.getElementById("d" + pin.length).classList.remove("on");
+    document.getElementById("errmsg").textContent = "";
+  }
+
+  function checkPin() {
+    if (pin === CODE) {
+      document.getElementById("login").style.display = "none";
+      document.getElementById("app").style.display = "block";
+    } else {
+      document.getElementById("errmsg").textContent = "קוד שגוי";
+      pin = "";
+      for (var i = 0; i < 4; i++) document.getElementById("d" + i).classList.remove("on");
+    }
+  }
+
+  for (var n = 0; n <= 9; n++) {
+    (function(num) {
+      document.getElementById("k" + num).addEventListener("click", function() { addPin(num); });
+    })(n);
+  }
+  document.getElementById("kdel").addEventListener("click", delPin);
+
+  document.getElementById("btnout").addEventListener("click", function() {
+    pin = ""; places = []; curcat = -1;
+    for (var i = 0; i < 4; i++) document.getElementById("d" + i).classList.remove("on");
+    document.getElementById("errmsg").textContent = "";
+    document.getElementById("app").style.display = "none";
+    document.getElementById("login").style.display = "flex";
+    document.getElementById("srcinput").value = "";
+    render();
+  });
+
+  function setcat(c) {
+    curcat = c;
+    document.querySelectorAll(".ctab").forEach(function(t) { t.classList.remove("on"); });
+    document.getElementById(c === -1 ? "call" : "c" + c).classList.add("on");
+    render();
+  }
+
+  document.getElementById("call").addEventListener("click", function() { setcat(-1); });
+  for (var ci = 0; ci < 5; ci++) {
+    (function(i) { document.getElementById("c" + i).addEventListener("click", function() { setcat(i); }); })(ci);
+  }
+
+  document.getElementById("btnsrc").addEventListener("click", doSearch);
+
+  function doSearch() {
+    var loc = document.getElementById("srcinput").value.trim();
+    if (!loc) return;
+    var btn = document.getElementById("btnsrc");
+    btn.disabled = true;
+    btn.textContent = "...";
+    document.getElementById("subloc").textContent = loc;
+    document.getElementById("results").innerHTML = "<div class='empty'><span class='spin'></span></div>";
+    places = [];
+    fetch("/.netlify/functions/ai", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ location: loc })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      places = data.places || [];
+      btn.disabled = false;
+      btn.textContent = "חפש";
+      render();
+    })
+    .catch(function() {
+      btn.disabled = false;
+      btn.textContent = "חפש";
+      document.getElementById("results").innerHTML = "<div class='empty'>שגיאה בטעינה</div>";
+    });
+  }
+
+  function render() {
+    var area = document.getElementById("results");
+    var f = curcat === -1 ? places : places.filter(function(p) { return p.cat === curcat; });
+    if (!places.length) {
+      area.innerHTML = "<div class='empty'><div class='bigico'>&#x1F5FA;&#xFE0F;</div>הזן מיקום</div>";
+      return;
+    }
+    if (!f.length) {
+      area.innerHTML = "<div class='empty'>אין תוצאות</div>";
+      return;
+    }
+    var emo = ["\uD83C\uDF7D\uFE0F", "\uD83C\uDFA1", "\uD83C\uDFAD", "\uD83D\uDE8C", "\uD83D\uDECD\uFE0F"];
+    var h = "";
+    f.forEach(function(p) {
+      var em = emo[p.cat] || "\uD83D\uDCCD";
+      var img = p.img ? "<img class='cardimg' src='" + p.img + "' onerror='this.style.display=\"none\"'/>" : "";
+      h += "<div class='card'>" + img + "<div class='cardbody'><div class='cardico'>" + em + "</div><div><div class='cardname'>" + p.name + "</div><div class='carddesc'>" + (p.desc || "") + "</div>" + (p.tip ? "<div class='cardtip'>\uD83D\uDCA1 " + p.tip + "</div>" : "") + "</div></div></div>";
+    });
+    area.innerHTML = h;
+  }
+
+})();
+</script>
+</body>
+</html>
