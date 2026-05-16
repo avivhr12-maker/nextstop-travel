@@ -24,12 +24,12 @@ body{background:#f5f5f0;min-height:100vh}
 .topbar{background:#fff;border-bottom:1px solid #e8e8e0;padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
 .topbar h2{font-size:18px;font-weight:600;color:#111}
 .topbar small{font-size:12px;color:#888;display:block}
-.topbar .btnout{font-size:12px;color:#888;background:none;border:1px solid #e0e0d8;border-radius:8px;padding:5px 12px;cursor:pointer}
+.topbar button{font-size:12px;color:#888;background:none;border:1px solid #e0e0d8;border-radius:8px;padding:5px 12px;cursor:pointer}
 .search{padding:1rem 1.25rem;background:#f5f5f0;border-bottom:1px solid #e8e8e0}
 .search label{font-size:12px;color:#888;display:block;margin-bottom:6px}
 .searchrow{display:flex;gap:8px;direction:ltr}
 .searchrow input{flex:1;height:42px;border-radius:10px;border:1px solid #ccc;background:#fff;padding:0 14px;font-size:15px;color:#111;outline:none;direction:rtl}
-.searchrow .btnsrc{height:42px;padding:0 18px;background:#111;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer;font-weight:500}
+.searchrow button{height:42px;padding:0 18px;background:#111;color:#fff;border:none;border-radius:10px;font-size:14px;cursor:pointer;font-weight:500}
 .cattabs{display:flex;gap:6px;padding:.75rem 1.25rem;overflow-x:auto;background:#fff;border-bottom:1px solid #e8e8e0;direction:ltr;scrollbar-width:none}
 .ctab{padding:6px 14px;border-radius:20px;font-size:13px;cursor:pointer;border:1px solid #e0e0d8;background:#f5f5f0;color:#666;white-space:nowrap;touch-action:manipulation}
 .ctab.on{background:#111;color:#fff;border-color:#111}
@@ -53,132 +53,34 @@ body{background:#f5f5f0;min-height:100vh}
 </head>
 <body>
 <div id="login">
-<div class="logo"><div style="font-size:48px">✈️</div><h1>Next Stop</h1><p>מדריך הנסיעות שלך</p></div>
-<div class="pinbox">
-<label>הזן קוד גישה</label>
+<div class="logo"><div style="font-size:48px">&#x2708;&#xFE0F;</div><h1>Next Stop</h1><p>&#x05DE;&#x05D3;&#x05E8;&#x05D9;&#x05DA; &#x05D4;&#x05E0;&#x05E1;&#x05D9;&#x05E2;&#x05D5;&#x05EA; &#x05E9;&#x05DC;&#x05DA;</p></div>
+<div class="pinbox"><label>&#x05D4;&#x05D6;&#x05DF; &#x05E7;&#x05D5;&#x05D3; &#x05D2;&#x05D9;&#x05E9;&#x05D4;</label>
 <div class="dots"><div class="dot" id="d0"></div><div class="dot" id="d1"></div><div class="dot" id="d2"></div><div class="dot" id="d3"></div></div>
-<div class="keys">
-<button id="k1">1</button><button id="k2">2</button><button id="k3">3</button>
-<button id="k4">4</button><button id="k5">5</button><button id="k6">6</button>
-<button id="k7">7</button><button id="k8">8</button><button id="k9">9</button>
-<button id="kdel" style="grid-column:1">⌫</button><button id="k0" style="grid-column:2">0</button>
-</div>
-<div class="errmsg" id="errmsg"></div>
-</div>
-</div>
+<div class="keys"><button id="k1">1</button><button id="k2">2</button><button id="k3">3</button><button id="k4">4</button><button id="k5">5</button><button id="k6">6</button><button id="k7">7</button><button id="k8">8</button><button id="k9">9</button><button id="kdel" style="grid-column:1">&#x232B;</button><button id="k0" style="grid-column:2">0</button></div>
+<div class="errmsg" id="errmsg"></div></div></div>
 <div id="app">
-<div class="topbar"><div><h2>Next Stop</h2><small id="subloc">מדריך הנסיעות שלך</small></div><button class="btnout" id="btnout">יציאה</button></div>
-<div class="search"><label>חפש עיר, מדינה או מלון</label>
-<div class="searchrow"><input type="text" id="srcinput" placeholder="Paris, Rome..."/><button class="btnsrc" id="btnsrc">חפש</button></div></div>
-<div class="cattabs">
-<button class="ctab on" id="call">הכל</button>
-<button class="ctab" id="c0">🍽️ מסעדות</button>
-<button class="ctab" id="c1">🎡 אטרקציות</button>
-<button class="ctab" id="c2">🎭 בילוי</button>
-<button class="ctab" id="c3">🚌 תחבורה</button>
-<button class="ctab" id="c4">🛍️ קניות</button>
-</div>
-<div class="results" id="results"><div class="empty"><div class="bigico">🗺️</div>הזן מיקום לגילוי מה בסביבה</div></div>
-<div class="footer"><div class="footlinks">
-<a href="https://did.li/Nextstop" target="_blank">וואטסאפ דילים</a>
-<a href="https://wa.me/972523370504" target="_blank">וואטסאפ ישיר</a>
-<a href="https://did.li/Nexttsop-facebook" target="_blank">פייסבוק</a>
-<a href="https://did.li/nextstop-instagram" target="_blank">אינסטגרם</a>
-</div><div class="footbrand">Next Stop 2026 | 052-3370504</div></div>
+<div class="topbar"><div><h2>Next Stop</h2><small id="subloc">&#x05DE;&#x05D3;&#x05E8;&#x05D9;&#x05DA; &#x05D4;&#x05E0;&#x05E1;&#x05D9;&#x05E2;&#x05D5;&#x05EA; &#x05E9;&#x05DC;&#x05DA;</small></div><button id="btnout">&#x05D9;&#x05E6;&#x05D9;&#x05D0;&#x05D4;</button></div>
+<div class="search"><label>&#x05D7;&#x05E4;&#x05E9; &#x05E2;&#x05D9;&#x05E8;, &#x05DE;&#x05D3;&#x05D9;&#x05E0;&#x05D4; &#x05D0;&#x05D5; &#x05DE;&#x05DC;&#x05D5;&#x05DF;</label><div class="searchrow"><input type="text" id="srcinput" placeholder="Paris, Rome, Barcelona..."/><button id="btnsrc">&#x05D7;&#x05E4;&#x05E9;</button></div></div>
+<div class="cattabs"><button class="ctab on" id="call">&#x05D4;&#x05DB;&#x05DC;</button><button class="ctab" id="c0">&#x1F37D;&#xFE0F; &#x05DE;&#x05E1;&#x05E2;&#x05D3;&#x05D5;&#x05EA;</button><button class="ctab" id="c1">&#x1F3A1; &#x05D0;&#x05D8;&#x05E8;&#x05E7;&#x05E6;&#x05D9;&#x05D5;&#x05EA;</button><button class="ctab" id="c2">&#x1F3AD; &#x05D1;&#x05D9;&#x05DC;&#x05D5;&#x05D9;</button><button class="ctab" id="c3">&#x1F68C; &#x05EA;&#x05D7;&#x05D1;&#x05D5;&#x05E8;&#x05D4;</button><button class="ctab" id="c4">&#x1F6CD;&#xFE0F; &#x05E7;&#x05E0;&#x05D9;&#x05D5;&#x05EA;</button></div>
+<div class="results" id="results"><div class="empty"><div class="bigico">&#x1F5FA;&#xFE0F;</div>&#x05D4;&#x05D6;&#x05DF; &#x05DE;&#x05D9;&#x05E7;&#x05D5;&#x05DD;</div></div>
+<div class="footer"><div class="footlinks"><a href="https://did.li/Nextstop" target="_blank">&#x05D5;&#x05D5;&#x05D0;&#x05D8;&#x05E1;&#x05D0;&#x05E4; &#x05D3;&#x05D9;&#x05DC;&#x05D9;&#x05DD;</a><a href="https://wa.me/972523370504" target="_blank">&#x05D5;&#x05D5;&#x05D0;&#x05D8;&#x05E1;&#x05D0;&#x05E4; &#x05D9;&#x05E9;&#x05D9;&#x05E8;</a><a href="https://did.li/Nexttsop-facebook" target="_blank">&#x05E4;&#x05D9;&#x05D9;&#x05E1;&#x05D1;&#x05D5;&#x05E7;</a><a href="https://did.li/nextstop-instagram" target="_blank">&#x05D0;&#x05D9;&#x05E0;&#x05E1;&#x05D8;&#x05D2;&#x05E8;&#x05DD;</a></div><div class="footbrand">Next Stop 2026 | 052-3370504</div></div>
 </div>
 <script>
-(function() {
-var CODE = "5262";
-var pin = "";
-var places = [];
-var curcat = null;
-
-function addPin(n) {
-  if (pin.length >= 4) return;
-  pin += String(n);
-  document.getElementById("d" + (pin.length - 1)).classList.add("on");
-  if (pin.length === 4) setTimeout(checkPin, 200);
-}
-
-function delPin() {
-  if (!pin.length) return;
-  pin = pin.slice(0, -1);
-  document.getElementById("d" + pin.length).classList.remove("on");
-  document.getElementById("errmsg").textContent = "";
-}
-
-function checkPin() {
-  if (pin === CODE) {
-    document.getElementById("login").style.display = "none";
-    document.getElementById("app").style.display = "block";
-  } else {
-    document.getElementById("errmsg").textContent = "קוד שגוי";
-    pin = "";
-    for (var i = 0; i < 4; i++) document.getElementById("d" + i).classList.remove("on");
-  }
-}
-
-for (var n = 0; n <= 9; n++) {
-  (function(num) {
-    document.getElementById("k" + num).addEventListener("click", function() { addPin(num); });
-  })(n);
-}
-document.getElementById("kdel").addEventListener("click", delPin);
-
-document.getElementById("btnout").addEventListener("click", function() {
-  pin = ""; places = []; curcat = null;
-  for (var i = 0; i < 4; i++) document.getElementById("d" + i).classList.remove("on");
-  document.getElementById("errmsg").textContent = "";
-  document.getElementById("app").style.display = "none";
-  document.getElementById("login").style.display = "flex";
-  document.getElementById("srcinput").value = "";
-  render();
-});
-
-function setcat(c) {
-  curcat = c;
-  document.querySelectorAll(".ctab").forEach(function(t) { t.classList.remove("on"); });
-  document.getElementById(c === null ? "call" : "c" + c).classList.add("on");
-  render();
-}
-
-document.getElementById("call").addEventListener("click", function() { setcat(null); });
-for (var ci = 0; ci < 5; ci++) {
-  (function(i) { document.getElementById("c" + i).addEventListener("click", function() { setcat(i); }); })(ci);
-}
-
-document.getElementById("btnsrc").addEventListener("click", doSearch);
-
-function doSearch() {
-  var loc = document.getElementById("srcinput").value.trim();
-  if (!loc) return;
-  var btn = document.getElementById("btnsrc");
-  btn.disabled = true; btn.textContent = "...";
-  document.getElementById("subloc").textContent = loc;
-  document.getElementById("results").innerHTML = "<div class='empty'><span class='spin'></span></div>";
-  places = [];
-  fetch("/.netlify/functions/ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ location: loc }) })
-  .then(function(r) { return r.json(); })
-  .then(function(data) { places = data.places || []; btn.disabled = false; btn.textContent = "חפש"; render(); })
-  .catch(function() { btn.disabled = false; btn.textContent = "חפש"; document.getElementById("results").innerHTML = "<div class='empty'>שגיאה בטעינה</div>"; });
-}
-
-function render() {
-  var area = document.getElementById("results");
-  var f = curcat === null ? places : places.filter(function(p) { return p.cat === curcat; });
-  if (!places.length) { area.innerHTML = "<div class='empty'><div class='bigico'>🗺️</div>הזן מיקום</div>"; return; }
-  if (!f.length) { area.innerHTML = "<div class='empty'>אין תוצאות</div>"; return; }
-  var emo = ["🍽️","🎡","🎭","🚌","🛍️"];
-  var h = "";
-  f.forEach(function(p) {
-    var em = emo[p.cat] || "📍";
-    var img = p.img ? "<img class='cardimg' src='" + p.img + "' onerror='this.style.display=\"none\"'/>" : "";
-    h += "<div class='card'>" + img + "<div class='cardbody'><div class='cardico'>" + em + "</div><div><div class='cardname'>" + p.name + "</div><div class='carddesc'>" + (p.desc || "") + "</div>" + (p.tip ? "<div class='cardtip'>💡 " + p.tip + "</div>" : "") + "</div></div></div>";
-  });
-  area.innerHTML = h;
-}
-
+(function(){
+var CODE="5262",pin="",places=[],curcat=-1;
+function addPin(n){if(pin.length>=4)return;pin+=String(n);document.getElementById("d"+(pin.length-1)).classList.add("on");if(pin.length===4)setTimeout(checkPin,200);}
+function delPin(){if(!pin.length)return;pin=pin.slice(0,-1);document.getElementById("d"+pin.length).classList.remove("on");document.getElementById("errmsg").textContent="";}
+function checkPin(){if(pin===CODE){document.getElementById("login").style.display="none";document.getElementById("app").style.display="block";}else{document.getElementById("errmsg").textContent="קוד שגוי";pin="";for(var i=0;i<4;i++)document.getElementById("d"+i).classList.remove("on");}}
+for(var n=0;n<=9;n++){(function(num){document.getElementById("k"+num).addEventListener("click",function(){addPin(num);});})(n);}
+document.getElementById("kdel").addEventListener("click",delPin);
+document.getElementById("btnout").addEventListener("click",function(){pin="";places=[];curcat=-1;for(var i=0;i<4;i++)document.getElementById("d"+i).classList.remove("on");document.getElementById("errmsg").textContent="";document.getElementById("app").style.display="none";document.getElementById("login").style.display="flex";document.getElementById("srcinput").value="";render();});
+function setcat(c){curcat=c;document.querySelectorAll(".ctab").forEach(function(t){t.classList.remove("on");});document.getElementById(c===-1?"call":"c"+c).classList.add("on");render();}
+document.getElementById("call").addEventListener("click",function(){setcat(-1);});
+for(var ci=0;ci<5;ci++){(function(i){document.getElementById("c"+i).addEventListener("click",function(){setcat(i);});})(ci);}
+document.getElementById("btnsrc").addEventListener("click",doSearch);
+function doSearch(){var loc=document.getElementById("srcinput").value.trim();if(!loc)return;var btn=document.getElementById("btnsrc");btn.disabled=true;btn.textContent="...";document.getElementById("subloc").textContent=loc;document.getElementById("results").innerHTML="<div class='empty'><span class='spin'></span></div>";places=[];fetch("/.netlify/functions/ai",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({location:loc})}).then(function(r){return r.json();}).then(function(data){places=data.places||[];btn.disabled=false;btn.textContent="חפש";render();}).catch(function(){btn.disabled=false;btn.textContent="חפש";document.getElementById("results").innerHTML="<div class='empty'>שגיאה בטעינה</div>";});}
+var emo=["\uD83C\uDF7D\uFE0F","\uD83C\uDFA1","\uD83C\uDFAD","\uD83D\uDE8C","\uD83D\uDECD\uFE0F"];
+function render(){var area=document.getElementById("results");var f=curcat===-1?places:places.filter(function(p){return p.cat===curcat;});if(!places.length){area.innerHTML="<div class='empty'><div class='bigico'>&#x1F5FA;&#xFE0F;</div>הזן מיקום</div>";return;}if(!f.length){area.innerHTML="<div class='empty'>אין תוצאות</div>";return;}var h="";f.forEach(function(p){var em=emo[p.cat]||"\uD83D\uDCCD";var img=p.img?"<img class='cardimg' src='"+p.img+"' onerror='this.style.display=\"none\"'/>" :"";h+="<div class='card'>"+img+"<div class='cardbody'><div class='cardico'>"+em+"</div><div><div class='cardname'>"+p.name+"</div><div class='carddesc'>"+(p.desc||"")+"</div>"+(p.tip?"<div class='cardtip'>\uD83D\uDCA1 "+p.tip+"</div>":"")+"</div></div></div>";});area.innerHTML=h;}
 })();
 </script>
-</body>
-</html>
+</body></html>
